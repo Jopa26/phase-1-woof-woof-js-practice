@@ -29,7 +29,7 @@ pups.forEach(pup => {
     }
 
     button.addEventListener('click',() => {
-        pup.isGoodDog =!pup.isGoodDogconst 
+        pup.isGoodDog =!pup.isGoodDog
         const updatedDogInfo ={ isGoodDog: pup.isGoodDog}
         fetch(`http://localhost:3000/pups/${pup.id}`, {
             method: "PATCH",
@@ -39,39 +39,40 @@ pups.forEach(pup => {
             },
             body: JSON.stringify(updatedDogInfo)
         })
-    })
-    
-    
-    let pups = []
-    let filterOn = false
-    
-    const filterButton = document.querySelector('#good-dog-filter')
-    filterButton.addEventListener('click', () => {
-        filterOn = !filterOn
-    
-        if(filterOn){
-            filterButton.innerText = "Filter good dogs: OFF"
-        }else{
-            filterButton.innerText = "Filter good dogs: ON"
+        let pups = []
+        let filterOn = false
         
+        const filterButton = document.querySelector('#good-dog-filter')
+        filterButton.addEventListener('click', () => {
+            filterOn = !filterOn
+        
+            if(filterOn){
+                filterButton.innerText = "Filter good dogs: OFF"
+            }else{
+                filterButton.innerText = "Filter good dogs: ON"
+            
+            }
+        
+        
+        const filteredPups = pups.filter(pup =>{
+            if(filterOn){
+                return pup.isGoodDog
+            }else{
+                return true
         }
-    
-    
-    const filteredPups = pups.filter(pup =>{
-        if(filterOn){
-            return pup.isGoodDog
-        }else{
-            return true
-    }
-    
-    })
-    
-    let pupsList = document.querySelector("#dog-bar")
-    pupsList.innerHTML = ""
-    renderPups(filteredPups)
-    
-    })
+        
+        })
+        
+        let pupsList = document.querySelector("#dog-bar")
+        pupsList.innerHTML = ""
+        renderPups(filteredPups)
+        
+        })
 
+
+    })
+    
+        
 
     })
 
@@ -89,10 +90,3 @@ document.addEventListener('DOMContent.Lodaded', function(){
 });
 
 console.log(allWoof())
-
-
-
-
-
-
-
